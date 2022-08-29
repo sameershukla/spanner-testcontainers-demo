@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.11'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('testcontainersVersion', "1.17.3")
+}
+
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-data-spanner:1.2.8.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-gcp-dependencies:1.2.8.RELEASE'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//TestContainers
+	testImplementation 'org.testcontainers:testcontainers:1.17.3'
+	testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.17.3'
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.9.0'
+	implementation 'org.testcontainers:gcloud:1.17.3'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
