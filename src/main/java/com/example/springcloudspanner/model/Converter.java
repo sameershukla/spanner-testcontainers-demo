@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-//@Transactional
 public class Converter {
 
     public static OrderEntity convertDTOToEntity(Order order){
