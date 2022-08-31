@@ -20,13 +20,9 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public String save(Order order) {
-        try{
-            OrderEntity orderEntity = Converter.convertDTOToEntity(order);
-            orderEntity.setOrderId(new Random().nextInt());
-            orderRepository.save(orderEntity);
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+        OrderEntity orderEntity = Converter.convertDTOToEntity(order);
+        orderEntity.setOrderId(new Random().nextInt());
+        orderRepository.save(orderEntity);
         return "Order Saved Successfully";
     }
 
