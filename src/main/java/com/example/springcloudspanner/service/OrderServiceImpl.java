@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-//@Transactional
+@Transactional
 public class OrderServiceImpl implements OrderService{
 
     @Autowired
@@ -21,11 +21,8 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public String save(Order order) {
         try{
-            System.out.println("OR:"+orderRepository);
             OrderEntity orderEntity = Converter.convertDTOToEntity(order);
             orderEntity.setOrderId(new Random().nextInt());
-            System.out.println(orderEntity);
-            System.out.println("OP:"+orderRepository);
             orderRepository.save(orderEntity);
         }catch(Exception ex){
             ex.printStackTrace();
