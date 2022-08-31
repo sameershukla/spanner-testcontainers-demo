@@ -20,5 +20,4 @@ public class OrderEntity {
 
     private String order_status;
 
-    //private Timestamp order_date;
 }
