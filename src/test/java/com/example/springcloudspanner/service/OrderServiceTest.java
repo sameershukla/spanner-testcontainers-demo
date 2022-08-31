@@ -69,7 +69,6 @@ public class OrderServiceTest {
 
     private void createDatabase(Spanner spanner) throws InterruptedException, ExecutionException {
         DatabaseAdminClient dbAdminClient = spanner.getDatabaseAdminClient();
-        System.out.println("-- dbAdminClient --"+dbAdminClient);
         Database database = dbAdminClient
                 .createDatabase(
                         INSTANCE_ID,
@@ -77,7 +76,6 @@ public class OrderServiceTest {
                         Arrays.asList("CREATE TABLE Orders (orderId INT64 NOT NULL, name STRING(255), order_status STRING(255)) PRIMARY KEY (orderId)")
                 )
                 .get();
-        System.out.println("-- database --"+database);
     }
 
     private Spanner spanner(){
@@ -107,7 +105,7 @@ public class OrderServiceTest {
 
         Order order = new Order();
         order.setOrder_status("COMPLETED");
-        order.setName("Order-1");
+        order.setName("Order1");
 
         String message = this.orderService.save(order);
         Assertions.assertEquals("Order Saved Successfully", message);
